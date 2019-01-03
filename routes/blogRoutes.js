@@ -24,9 +24,9 @@ module.exports = app => {
     });
 
     app.post('/api/blogs', requireLogin, cleanCache, async (req, res) => {
-        const {title, content} = req.body;
-
+        const {title, content, imageUrl} = req.body;
         const blog = new Blog({
+            imageUrl,
             title,
             content,
             _user: req.user.id
@@ -39,4 +39,5 @@ module.exports = app => {
             res.send(400, err);
         }
     });
+
 };
